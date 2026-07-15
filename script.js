@@ -5,11 +5,42 @@ class ParticleSystem {
     this.ctx = canvas.getContext('2d');
     this.particles = [];
     this.mouse = { x: null, y: null, radius: 150 };
+    this.animationId = null;
+    this.isAnimating = false;
     this.resize();
     window.addEventListener('resize', () => this.resize());
     window.addEventListener('mousemove', (e) => { this.mouse.x = e.x; this.mouse.y = e.y; });
     this.init();
-    this.animate();
+    
+    // Set up intersection observer to play/pause particles
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.start();
+        } else {
+          this.stop();
+        }
+      });
+    }, { threshold: 0 });
+    
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      observer.observe(heroSection);
+    } else {
+      this.start();
+    }
+  }
+  start() {
+    if (!this.isAnimating) {
+      this.isAnimating = true;
+      this.animate();
+    }
+  }
+  stop() {
+    if (this.isAnimating) {
+      this.isAnimating = false;
+      cancelAnimationFrame(this.animationId);
+    }
   }
   resize() {
     this.canvas.width = window.innerWidth;
@@ -30,6 +61,7 @@ class ParticleSystem {
     }
   }
   animate() {
+    if (!this.isAnimating) return;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.particles.forEach((p, i) => {
       p.x += p.speedX; p.y += p.speedY;
@@ -63,7 +95,7 @@ class ParticleSystem {
         }
       }
     });
-    requestAnimationFrame(() => this.animate());
+    this.animationId = requestAnimationFrame(() => this.animate());
   }
 }
 
@@ -269,13 +301,13 @@ function initCustomCursor() {
   const animateCursor = () => {
     dotX = mouseX;
     dotY = mouseY;
-    cursorDot.style.left = `${dotX}px`;
-    cursorDot.style.top = `${dotY}px`;
+    cursorDot.style.setProperty('--cursor-x', `${dotX}px`);
+    cursorDot.style.setProperty('--cursor-y', `${dotY}px`);
 
     outlineX += (mouseX - outlineX) * 0.15;
     outlineY += (mouseY - outlineY) * 0.15;
-    cursorOutline.style.left = `${outlineX}px`;
-    cursorOutline.style.top = `${outlineY}px`;
+    cursorOutline.style.setProperty('--cursor-x', `${outlineX}px`);
+    cursorOutline.style.setProperty('--cursor-y', `${outlineY}px`);
 
     requestAnimationFrame(animateCursor);
   };
