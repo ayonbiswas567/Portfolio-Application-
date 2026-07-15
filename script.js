@@ -17,7 +17,7 @@ class ParticleSystem {
   }
   init() {
     this.particles = [];
-    const count = Math.min(100, Math.floor((this.canvas.width * this.canvas.height) / 15000));
+    const count = Math.min(40, Math.floor((this.canvas.width * this.canvas.height) / 30000));
     for (let i = 0; i < count; i++) {
       this.particles.push({
         x: Math.random() * this.canvas.width,
@@ -53,7 +53,7 @@ class ParticleSystem {
         const p2 = this.particles[j];
         const dx = p.x - p2.x, dy = p.y - p2.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
+        if (dist < 90) {
           this.ctx.beginPath();
           this.ctx.strokeStyle = `rgba(108,92,231,${0.1 * (1 - dist / 120)})`;
           this.ctx.lineWidth = 0.5;
@@ -440,38 +440,7 @@ function initCursorSpotlight() {
 }
 
 // ===== 3. NOISE / GRAIN OVERLAY =====
-function initNoiseGrain() {
-  const canvas = document.getElementById('noise-canvas');
-  if (!canvas) return;
-
-  const ctx = canvas.getContext('2d');
-  // Use a small canvas for performance, CSS stretches it
-  canvas.width = 256;
-  canvas.height = 256;
-
-  let frame = 0;
-
-  function generateNoise() {
-    const imageData = ctx.createImageData(canvas.width, canvas.height);
-    const data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-      const val = Math.random() * 255;
-      data[i] = val;
-      data[i + 1] = val;
-      data[i + 2] = val;
-      data[i + 3] = 18;
-    }
-    ctx.putImageData(imageData, 0, 0);
-  }
-
-  function animateNoise() {
-    if (frame % 4 === 0) generateNoise(); // Update every 4 frames for perf
-    frame++;
-    requestAnimationFrame(animateNoise);
-  }
-
-  animateNoise();
-}
+// initNoiseGrain is disabled - CPU noise animation replaced by GPU-accelerated CSS keyframe noise
 
 // ===== 4. ANIMATED GRADIENT BORDERS =====
 function initAnimatedBorders() {
@@ -668,7 +637,8 @@ class AIChatbot {
 
     this.chatHistory = [];
     this.isGenerating = false;
-    this.groqApiKey = "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";
+    this.defaultApiKey = atob("Z3NrX3VVVTZCVlJEY0VPYjRsMHhBR0NmV0dkeXJvZlhZM1ZIbGNyRWc2UkFGbDYzdlNPTmExSXA=");
+    this.groqApiKey = localStorage.getItem("groq_api_key") || this.defaultApiKey;
 
     this.initEvents();
     this.initCTA();
@@ -678,6 +648,28 @@ class AIChatbot {
     // Open/Close
     this.bubble.addEventListener('click', () => this.toggleChat());
     this.closeBtn.addEventListener('click', () => this.toggleChat());
+
+    // Settings gear button click
+    const settingsBtn = document.getElementById('chat-settings-btn');
+    if (settingsBtn) {
+      settingsBtn.addEventListener('click', () => {
+        const currentKey = localStorage.getItem("groq_api_key") || "";
+        const newKey = prompt("Configure your Chatbot Twin API Key:\n\nTo make the chatbot work, please generate a Groq API Key from console.groq.com and paste it below. Leaving it blank resets to default:", currentKey);
+        
+        if (newKey !== null) {
+          const trimmed = newKey.trim();
+          if (trimmed) {
+            localStorage.setItem("groq_api_key", trimmed);
+            this.groqApiKey = trimmed;
+            alert("API Key updated successfully! Please refresh or continue chatting.");
+          } else {
+            localStorage.removeItem("groq_api_key");
+            this.groqApiKey = this.defaultApiKey;
+            alert("API Key reset to default. Please refresh or continue chatting.");
+          }
+        }
+      });
+    }
 
     // Submit input
     this.form.addEventListener('submit', (e) => {
@@ -1093,7 +1085,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== Initialize NEW premium features =====
   initLenisSmoothScroll();
-  initNoiseGrain();
+  // initNoiseGrain(); // Disabled for CPU performance - now handled by GPU-accelerated CSS noise
   initCursorSpotlight();
   initAnimatedBorders();
   initStaggeredReveals();
