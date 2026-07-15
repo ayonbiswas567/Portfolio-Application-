@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ayon Biswas | Applied AI Engineer & Cloud-Native Systems Architect</title>
+  <meta name="description"
+    content="Portfolio of Ayon Biswas — Applied AI Engineer specializing in Cloud-Native Systems, Backend Architecture, and Distributed Systems at Keysight R&D." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js" defer></script>
+</head>
+
+<body class="loading">
+
+  <!-- NOISE GRAIN OVERLAY -->
+  <canvas id="noise-canvas"></canvas>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <svg class="logo-svg" viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="loader-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6c5ce7" />
+              <stop offset="100%" stop-color="#00cec9" />
+            </linearGradient>
+          </defs>
+          <circle class="logo-ring" cx="50" cy="50" r="45" />
+          <text class="logo-text" x="50%" y="54%" text-anchor="middle" dominant-baseline="middle">AB.</text>
+        </svg>
+      </div>
+      <div class="loader-progress-container">
+        <div class="loader-progress-bar"></div>
+      </div>
+      <div class="loader-percentage">0%</div>
+      <div class="loader-status">Initializing System...</div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo magnetic">AB.</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about" class="magnetic">About</a></li>
+        <li><a href="#skills" class="magnetic">Skills</a></li>
+        <li><a href="#experience" class="magnetic">Experience</a></li>
+        <li><a href="#projects" class="magnetic">Projects</a></li>
+        <li><a href="#services" class="magnetic">Services</a></li>
+        <li><a href="#education" class="magnetic">Education</a></li>
+        <li><a href="#contact" class="magnetic">Contact</a></li>
+        <li><a href="Ayon_Biswas_Resume.pdf" class="nav-resume-btn magnetic" download><i class="fas fa-file-download"
+              style="margin-right: 5px;"></i> Resume</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-video-container">
+      <video class="hero-video" autoplay loop muted playsinline>
+        <source src="intro video.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-video-overlay"></div>
+    </div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-badge">🚀 Available for Opportunities</span>
+        <h1 class="hero-title reveal-text">
+          Hi, I'm <span class="gradient-text">Ayon Biswas</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span id="typewriter"></span><span class="cursor">|</span><br />
+          Building intelligent, scalable systems at Keysight R&D — working with Lockheed Martin, Boeing & Emirates.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary magnetic">View My Work</a>
+          <a href="Ayon_Biswas_Resume.pdf" class="btn btn-outline magnetic" download><i class="fas fa-file-download"
+              style="margin-right: 8px;"></i> Download CV</a>
+          <button id="hero-play-btn" class="btn btn-outline magnetic"><i class="fas fa-play"
+              style="margin-right: 8px;"></i> Watch Video</button>
+        </div>
+      </div>
+      <div class="hero-stats reveal">
+        <div class="hero-stat-card tilt-card">
+          <div class="stat-number" data-count="2" data-suffix="+">0</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="hero-stat-card tilt-card">
+          <div class="stat-number" data-count="3" data-suffix="">0</div>
+          <div class="stat-label">Enterprise Clients</div>
+        </div>
+        <div class="hero-stat-card tilt-card">
+          <div class="stat-number" data-count="60" data-suffix="%">0</div>
+          <div class="stat-label">Performance Boost</div>
+        </div>
+        <div class="hero-stat-card tilt-card">
+          <div class="stat-number" data-count="5" data-suffix="+">0</div>
+          <div class="stat-label">AI Projects Built</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH MARQUEE -->
+  <section class="tech-marquee-section">
+    <div class="marquee-gradient-left"></div>
+    <div class="marquee-gradient-right"></div>
+    <div class="tech-marquee-container">
+      <div class="tech-marquee-track">
+        <div class="marquee-item"><i class="fab fa-python" style="color: #3776ab;"></i> Python</div>
+        <div class="marquee-item"><i class="fas fa-brain" style="color: #6c5ce7;"></i> LangChain</div>
+        <div class="marquee-item"><i class="fas fa-network-wired" style="color: #00cec9;"></i> LangGraph</div>
+        <div class="marquee-item"><i class="fab fa-docker" style="color: #2496ed;"></i> Docker</div>
+        <div class="marquee-item"><i class="fas fa-cubes" style="color: #326ce5;"></i> Kubernetes</div>
+        <div class="marquee-item"><i class="fab fa-microsoft" style="color: #0089d6;"></i> Azure</div>
+        <div class="marquee-item"><i class="fas fa-bolt" style="color: #009688;"></i> FastAPI</div>
+        <div class="marquee-item"><i class="fab fa-react" style="color: #61dafb;"></i> React</div>
+        <div class="marquee-item"><i class="fas fa-database" style="color: #336791;"></i> PostgreSQL</div>
+        <div class="marquee-item"><i class="fas fa-gears" style="color: #fd79a8;"></i> LLMOps</div>
+        <!-- Duplicate for loop -->
+        <div class="marquee-item"><i class="fab fa-python" style="color: #3776ab;"></i> Python</div>
+        <div class="marquee-item"><i class="fas fa-brain" style="color: #6c5ce7;"></i> LangChain</div>
+        <div class="marquee-item"><i class="fas fa-network-wired" style="color: #00cec9;"></i> LangGraph</div>
+        <div class="marquee-item"><i class="fab fa-docker" style="color: #2496ed;"></i> Docker</div>
+        <div class="marquee-item"><i class="fas fa-cubes" style="color: #326ce5;"></i> Kubernetes</div>
+        <div class="marquee-item"><i class="fab fa-microsoft" style="color: #0089d6;"></i> Azure</div>
+        <div class="marquee-item"><i class="fas fa-bolt" style="color: #009688;"></i> FastAPI</div>
+        <div class="marquee-item"><i class="fab fa-react" style="color: #61dafb;"></i> React</div>
+        <div class="marquee-item"><i class="fas fa-database" style="color: #336791;"></i> PostgreSQL</div>
+        <div class="marquee-item"><i class="fas fa-gears" style="color: #fd79a8;"></i> LLMOps</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title reveal-text">Turning Complex Problems into <span class="gradient-text">Elegant
+            Solutions</span></h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <div class="photo-wrapper">
+            <div class="photo-glow"></div>
+            <img src="ayon-photo.jpg" alt="Ayon Biswas at Keysight Technologies R&D" class="profile-img" />
+            <div class="photo-border"></div>
+          </div>
+          <div class="photo-caption">
+            <span class="caption-dot"></span> Currently at Keysight R&D, Gurugram
+          </div>
+        </div>
+        <div class="about-text reveal">
+          <p>I'm an Applied AI Engineer at <strong>Keysight Technologies R&D</strong>, where I architect intelligent
+            systems for enterprise clients including <strong>Lockheed Martin</strong>, <strong>Boeing</strong>, and
+            <strong>Emirates</strong>.
+          </p>
+          <p>My expertise lies at the intersection of <strong>AI/ML</strong>, <strong>cloud-native
+              architecture</strong>, and <strong>backend engineering</strong>. I specialize in building
+            Retrieval-Augmented Generation (RAG) applications, multi-agent workflows, and high-performance distributed
+            systems.</p>
+          <p>With a Master's in Signal &amp; Image Processing (AI) from <strong>NIT Rourkela</strong>, I bring deep
+            technical knowledge to every challenge, from optimizing LLM reliability to designing scalable cloud
+            infrastructure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" style="background: var(--bg-secondary);">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">Technical Arsenal</p>
+        <h2 class="section-title reveal-text">Skills & <span class="gradient-text">Technologies</span></h2>
+      </div>
+      <div class="skills-bento-grid">
+        <!-- AI & Agentic Workflows (1x1 width) -->
+        <div class="bento-card bento-ai reveal tilt-card">
+          <div class="bento-header">
+            <div class="bento-title-wrapper">
+              <span class="bento-icon">🤖</span>
+              <h3>AI & Agentic Frameworks</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">LangChain</span><span class="skill-tag">LangGraph</span><span class="skill-tag">LangSmith</span><span class="skill-tag">LlamaIndex</span>
+            </div>
+          </div>
+          <div class="bento-visual node-graph-visual">
+            <svg class="node-graph-svg" viewBox="0 0 200 200">
+              <!-- Grid lines for background -->
+              <defs>
+                <pattern id="dot-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.07)" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#dot-grid)" />
+              
+              <!-- Connection Lines -->
+              <path class="graph-link" d="M 35 100 L 100 100" />
+              <path class="graph-link" d="M 100 100 L 100 35" />
+              <path class="graph-link" d="M 100 100 L 100 165" />
+              <path class="graph-link" d="M 100 100 L 165 100" />
+              
+              <!-- Travel Pulses -->
+              <circle class="pulse-dot" r="2.5" fill="var(--accent2)">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M 35 100 L 100 100" />
+              </circle>
+              <circle class="pulse-dot" r="2.5" fill="var(--accent)">
+                <animateMotion dur="3s" begin="0.8s" repeatCount="indefinite" path="M 100 100 L 100 35" />
+              </circle>
+              <circle class="pulse-dot" r="2.5" fill="var(--accent3)">
+                <animateMotion dur="3s" begin="0.8s" repeatCount="indefinite" path="M 100 100 L 100 165" />
+              </circle>
+              <circle class="pulse-dot" r="2.5" fill="var(--accent2)">
+                <animateMotion dur="3s" begin="1.6s" repeatCount="indefinite" path="M 100 100 L 165 100" />
+              </circle>
+              
+              <!-- Nodes -->
+              <g class="graph-node" transform="translate(35, 100)">
+                <circle r="15" fill="rgba(10,10,15,0.95)" stroke="var(--accent)" stroke-width="2" />
+                <text class="node-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="9"></text>
+                <text class="node-label" text-anchor="middle" y="-20" font-size="9px">Input</text>
+              </g>
+              <g class="graph-node" transform="translate(100, 35)">
+                <circle r="15" fill="rgba(10,10,15,0.95)" stroke="var(--accent2)" stroke-width="2" />
+                <text class="node-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="9"></text>
+                <text class="node-label" text-anchor="middle" y="-20" font-size="9px">RAG</text>
+              </g>
+              <g class="graph-node" transform="translate(100, 165)">
+                <circle r="15" fill="rgba(10,10,15,0.95)" stroke="var(--accent3)" stroke-width="2" />
+                <text class="node-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="9"></text>
+                <text class="node-label" text-anchor="middle" y="24" font-size="9px">SQL</text>
+              </g>
+              <g class="graph-node" transform="translate(100, 100)">
+                <circle r="22" fill="rgba(10,10,15,0.95)" stroke="var(--accent)" stroke-width="2.5" />
+                <text class="node-icon" text-anchor="middle" y="6" fill="#fff" font-size="13">🤖</text>
+                <text class="node-label" text-anchor="middle" y="-28" font-size="10px" font-weight="bold" fill="var(--accent)">Agent</text>
+              </g>
+              <g class="graph-node" transform="translate(165, 100)">
+                <circle r="15" fill="rgba(10,10,15,0.95)" stroke="var(--accent3)" stroke-width="2" />
+                <text class="node-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="9"></text>
+                <text class="node-label" text-anchor="middle" y="-20" font-size="9px">Output</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Backend & APIs (Single width, High height) -->
+        <div class="bento-card bento-backend reveal tilt-card">
+          <div class="bento-header">
+            <div class="bento-title-wrapper">
+              <span class="bento-icon">⚙️</span>
+              <h3>Backend & API Development</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span><span class="skill-tag">FastAPI</span><span class="skill-tag">C#</span><span class="skill-tag">ASP.NET Core</span>
+            </div>
+          </div>
+          <div class="bento-visual terminal-visual">
+            <div class="terminal-header">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="terminal-title">fastapi-server.py</span>
+            </div>
+            <div class="terminal-body">
+              <code id="terminal-code"></code>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cloud & DevOps (Single width) -->
+        <div class="bento-card bento-devops reveal tilt-card">
+          <div class="bento-header">
+            <div class="bento-title-wrapper">
+              <span class="bento-icon">☁️</span>
+              <h3>Cloud & DevOps</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">Azure</span><span class="skill-tag">AKS</span><span class="skill-tag">Docker</span><span class="skill-tag">Kubernetes</span>
+            </div>
+          </div>
+          <div class="bento-visual devops-visual">
+            <div class="cluster-visual">
+              <div class="k8s-pod">
+                <i class="fab fa-docker" style="color: #2496ed;"></i>
+                <div class="pulse-indicator online"></div>
+              </div>
+              <div class="k8s-pod active-pod">
+                <i class="fas fa-cubes" style="color: #326ce5;"></i>
+                <div class="pulse-indicator online"></div>
+              </div>
+              <div class="k8s-pod">
+                <i class="fab fa-microsoft" style="color: #0089d6;"></i>
+                <div class="pulse-indicator online"></div>
+              </div>
+            </div>
+            <div class="metric-meter">
+              <span class="meter-label">Kubernetes Cluster Status</span>
+              <div class="meter-bar"><div class="meter-fill" style="width: 98.4%;"></div></div>
+              <span class="meter-val">AKS: Active (98.4% CPU healthy)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data & Search Infrastructure (Single width) -->
+        <div class="bento-card bento-data reveal tilt-card">
+          <div class="bento-header">
+            <div class="bento-title-wrapper">
+              <span class="bento-icon">🗄️</span>
+              <h3>Data & Search Infrastructure</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">FAISS</span><span class="skill-tag">ChromaDB</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">Vector DB</span>
+            </div>
+          </div>
+          <div class="bento-visual data-visual">
+            <div class="db-query-sim">
+              <div class="query-input">
+                <span class="query-prompt">&gt;</span> <span class="query-text">Match context...</span>
+              </div>
+              <div class="results-stack">
+                <div class="result-item">
+                  <span class="score">0.982</span>
+                  <span class="doc-name">agent_profile.pdf</span>
+                </div>
+                <div class="result-item">
+                  <span class="score">0.891</span>
+                  <span class="doc-name">keysight_finder.docx</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Front-End (Single width) -->
+        <div class="bento-card bento-frontend reveal tilt-card">
+          <div class="bento-header">
+            <div class="bento-title-wrapper">
+              <span class="bento-icon">🎨</span>
+              <h3>Front-End</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">React</span><span class="skill-tag">Angular</span><span class="skill-tag">Blazor</span><span class="skill-tag">TailwindCSS</span>
+            </div>
+          </div>
+          <div class="bento-visual frontend-visual">
+            <div class="mock-browser">
+              <div class="browser-bar">
+                <span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span>
+                <span class="browser-url">ayon-portfolio/admin</span>
+              </div>
+              <div class="browser-body">
+                <aside class="mock-sidebar">
+                  <div class="sidebar-item active-accent"></div>
+                  <div class="sidebar-item"></div>
+                  <div class="sidebar-item"></div>
+                </aside>
+                <main class="mock-main">
+                  <header class="mock-header-panel">
+                    <div class="header-line active-accent-bg"></div>
+                  </header>
+                  <section class="mock-grid">
+                    <div class="grid-card-mock"><div class="mini-chart active-accent-bg"></div></div>
+                    <div class="grid-card-mock"></div>
+                  </section>
+                </main>
+              </div>
+            </div>
+            <div class="color-options-row">
+              <button class="color-dot active-dot" data-accent="#6c5ce7" style="background: #6c5ce7;" aria-label="Accent Purple"></button>
+              <button class="color-dot" data-accent="#00cec9" style="background: #00cec9;" aria-label="Accent Cyan"></button>
+              <button class="color-dot" data-accent="#fd79a8" style="background: #fd79a8;" aria-label="Accent Pink"></button>
+              <button class="color-dot" data-accent="#00b894" style="background: #00b894;" aria-label="Accent Green"></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Architecture (Single width) -->
+        <div class="bento-card bento-arch reveal tilt-card">
+          <div class="bento-header">
+            <div class="bento-title-wrapper">
+              <span class="bento-icon">🏗️</span>
+              <h3>System Architecture</h3>
+            </div>
+            <div class="skill-tags">
+              <span class="skill-tag">RAG</span><span class="skill-tag">System Design</span><span class="skill-tag">Semantic Cache</span>
+            </div>
+          </div>
+          <div class="bento-visual architecture-visual">
+            <svg class="arch-flow-svg" viewBox="0 0 200 200">
+              <!-- Grid lines -->
+              <rect width="100%" height="100%" fill="url(#dot-grid)" />
+              
+              <!-- Data Pipe connections -->
+              <path class="flow-pipe" d="M 100 25 L 100 85" />
+              <path class="flow-pipe" d="M 100 85 L 45 145" />
+              <path class="flow-pipe" d="M 100 85 L 155 145" />
+              
+              <!-- Travel Pulses -->
+              <circle class="pulse-dot" r="2.5" fill="var(--accent)">
+                <animateMotion dur="3s" repeatCount="indefinite" path="M 100 25 L 100 85" />
+              </circle>
+              <circle class="pulse-dot" r="2.5" fill="var(--accent2)">
+                <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M 100 85 L 45 145" />
+              </circle>
+              <circle class="pulse-dot" r="2.5" fill="var(--accent3)">
+                <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M 100 85 L 155 145" />
+              </circle>
+              
+              <!-- Stack Layers -->
+              <!-- Layer 1: Client -->
+              <g class="arch-layer" transform="translate(100, 25)">
+                <circle r="14" fill="rgba(10,10,15,0.95)" stroke="var(--accent)" stroke-width="2" />
+                <text class="arch-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="8"></text>
+                <text class="arch-label" text-anchor="middle" y="-20" font-size="8px">Client</text>
+              </g>
+              <!-- Layer 2: API Gateway -->
+              <g class="arch-layer" transform="translate(100, 85)">
+                <circle r="18" fill="rgba(10,10,15,0.95)" stroke="var(--accent2)" stroke-width="2.5" />
+                <text class="arch-icon" text-anchor="middle" y="5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="10"></text>
+                <text class="arch-label" text-anchor="middle" y="-24" font-size="8px" font-weight="bold">Gateway</text>
+              </g>
+              <!-- Layer 3a: Vector Database (Left) -->
+              <g class="arch-layer" transform="translate(45, 145)">
+                <circle r="15" fill="rgba(10,10,15,0.95)" stroke="var(--accent3)" stroke-width="2" />
+                <text class="arch-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="8"></text>
+                <text class="arch-label" text-anchor="middle" y="24" font-size="8px">Vector DB</text>
+              </g>
+              <!-- Layer 3b: LLM Provider (Right) -->
+              <g class="arch-layer" transform="translate(155, 145)">
+                <circle r="15" fill="rgba(10,10,15,0.95)" stroke="var(--accent3)" stroke-width="2" />
+                <text class="arch-icon" text-anchor="middle" y="4.5" font-family="'Font Awesome 6 Free'" font-weight="900" fill="#fff" font-size="8">🧠</text>
+                <text class="arch-label" text-anchor="middle" y="24" font-size="8px">LLM Core</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">Career Journey</p>
+        <h2 class="section-title reveal-text">Professional <span class="gradient-text">Experience</span></h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-card">
+            <span class="timeline-date">Mar 2024 – Present</span>
+            <h3 class="timeline-role">Software Engineer – R&D</h3>
+            <p class="timeline-company">Keysight Technologies</p>
+            <p class="timeline-location">📍 Gurugram, India &nbsp;|&nbsp; Clients: Lockheed Martin, Boeing, Emirates</p>
+            <ul class="timeline-bullets">
+              <li>Architected "The R&D Finder," an internal RAG application using Python and LangChain to enable
+                engineers to semantically search complex technical documentation, drastically reducing information
+                retrieval time.</li>
+              <li>Applied rigorous QA methodologies to AI outputs, implementing edge-case testing, Pydantic data
+                validation, and iterative prompt refinement to eliminate LLM hallucinations.</li>
+              <li>Collaborated with R&D teams to translate domain-specific requirements (RTSA, acquisition logs) into
+                robust software testing suites.</li>
+              <li>Managed defect tracking and regression testing within a heavily structured corporate environment,
+                ensuring seamless code integration across complex architectures.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-card">
+            <span class="timeline-date">Oct 2023 – Mar 2024</span>
+            <h3 class="timeline-role">Software Engineer – R&D</h3>
+            <p class="timeline-company">AMETEK Mocon (USA BU)</p>
+            <p class="timeline-location">📍 Bengaluru, India</p>
+            <ul class="timeline-bullets">
+              <li>Developed and maintained core features for a Monolithic enterprise WPF application using C#, ASP.NET
+                MVC, and .NET Framework 4.8.</li>
+              <li>Optimized SQL Server database queries and stored procedures, decreasing Load time by 60%.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" style="background: var(--bg-secondary);">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">Featured Work</p>
+        <h2 class="section-title reveal-text">Projects That <span class="gradient-text">Define Me</span></h2>
+      </div>
+      <div class="projects-grid">
+        <div class="project-card reveal tilt-card">
+          <div class="project-header">
+            <span class="project-number">01</span>
+            <h3 class="project-title">Enterprise RAG PD Finder</h3>
+          </div>
+          <div class="project-body">
+            <p>Architected and deployed an enterprise-grade RAG system over 500+ complex hardware documents, reducing engineering manual search time by 70% and ensuring verifiable source grounding to mitigate LLM hallucinations.</p>
+            <p>Designed a Hybrid Search Architecture merging dense semantic retrieval (Qdrant, HNSW/ANN) with sparse BM25 keyword matching (SQLite FTS5), improving retrieval precision by 35% over semantic-only baselines.</p>
+            <p>Packaged the full AI stack into a 950 MB standalone portable executable (Streamlit, ONNX runtime, Qdrant), eliminating cloud SaaS dependencies and saving $5,000+ annually.</p>
+            <div class="project-tech">
+              <span>Python</span><span>Qdrant</span><span>LangChain</span><span>FastAPI</span><span>ONNX Runtime</span><span>Streamlit</span>
+            </div>
+            <a href="https://github.com/ayonbiswas567/RAG-PD-Finder-for-Enterprise-Technical-Docs" target="_blank" class="project-link-btn magnetic">
+              View Repository <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+        <div class="project-card reveal tilt-card">
+          <div class="project-header">
+            <span class="project-number">02</span>
+            <h3 class="project-title">Brain Tumor Detection & Classification</h3>
+          </div>
+          <div class="project-body">
+            <p>Developed a CNN-based medical image classification pipeline in PyTorch to detect and classify brain tumors (glioma, meningioma, pituitary) from MRI scans, achieving 96%+ test accuracy.</p>
+            <p>Leveraged ResNet-50 transfer learning, advanced data augmentation, and hyperparameter tuning, integrated with a custom validation suite and Grad-CAM explainability visualizations.</p>
+            <p>Deployed the inference pipeline via FastAPI and Docker, integrating end-to-end experiment tracking and model versioning with MLflow.</p>
+            <div class="project-tech">
+              <span>Python</span><span>PyTorch</span><span>FastAPI</span><span>Docker</span><span>MLflow</span><span>Grad-CAM</span>
+            </div>
+            <a href="https://colab.research.google.com/drive/1Vz-KCd3qbzk950LZFpOnk2QWnpxSaYAF#scrollTo=GcOHtW_-P8kH" target="_blank" class="project-link-btn magnetic">
+              View Notebook <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+        </div>
+        <div class="project-card reveal tilt-card">
+          <div class="project-header">
+            <span class="project-number">03</span>
+            <h3 class="project-title">JobClaw Swarm</h3>
+          </div>
+          <div class="project-body">
+            <p>Engineered an agentic AI career copilot that plans, remembers, executes, and validates every step of the job search lifecycle autonomously.</p>
+            <p>Designed a multi-agent orchestration swarm using LangGraph coupled with a browser automation execution layer powered by Playwright and background workers.</p>
+            <p>Built a secure Next.js frontend powered by a Postgres, pgvector, and Redis memory stack, featuring OAuth2/JWT security, Stripe payments, and OpenTelemetry observability.</p>
+            <div class="project-tech">
+              <span>Next.js</span><span>LangGraph</span><span>Playwright</span><span>PostgreSQL</span><span>pgvector</span><span>Redis</span><span>Stripe</span>
+            </div>
+            <a href="https://github.com/ayonbiswas567/JobClaw-Swarm" target="_blank" class="project-link-btn magnetic">
+              View Repository <i class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">Services Offered</p>
+        <h2 class="section-title reveal-text">Professional <span class="gradient-text">Solutions &amp; Expertise</span></h2>
+      </div>
+      <div class="services-grid">
+        <!-- Service 1 -->
+        <div class="service-card reveal tilt-card">
+          <div class="service-header">
+            <span class="service-icon"><i class="fas fa-network-wired"></i></span>
+            <h3 class="service-title">Workflow Automation &amp; Agentic AI</h3>
+          </div>
+          <div class="service-body">
+            <ul class="service-bullets">
+              <li>Multi-agent architectures built with LangGraph &amp; LangChain.</li>
+              <li>Self-correcting ReAct loops &amp; advanced tool calling integrations.</li>
+              <li>Customized agentic automations for founders, SMBs, &amp; corporate workflows.</li>
+              <li>Semantic caching &amp; LLM cost/latency optimization strategies.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Service 2 -->
+        <div class="service-card reveal tilt-card">
+          <div class="service-header">
+            <span class="service-icon"><i class="fas fa-laptop-code"></i></span>
+            <h3 class="service-title">AI-Integrated Premium Web Apps</h3>
+          </div>
+          <div class="service-body">
+            <ul class="service-bullets">
+              <li>Responsive, bespoke front-end UI design with premium interactive animations.</li>
+              <li>High-performance asynchronous FastAPI backends with Pydantic validation.</li>
+              <li>Seamless GenAI API integrations (OpenAI, Anthropic, Groq, Ollama).</li>
+              <li>Scalable cloud-native deployment with production-ready live URLs.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Service 3 -->
+        <div class="service-card reveal tilt-card">
+          <div class="service-header">
+            <span class="service-icon"><i class="fas fa-project-diagram"></i></span>
+            <h3 class="service-title">Strategic AI &amp; Cloud Architecture</h3>
+          </div>
+          <div class="service-body">
+            <ul class="service-bullets">
+              <li>Architectural advisory on enterprise systems design &amp; cloud-native scale.</li>
+              <li>Hybrid RAG designs featuring vector databases (FAISS, ChromaDB).</li>
+              <li>Robust CI/CD pipelines &amp; containerized microservices (Docker, K8s).</li>
+              <li>Strategic selection of open-source vs. proprietary LLM models.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Service 4 -->
+        <div class="service-card reveal tilt-card">
+          <div class="service-header">
+            <span class="service-icon"><i class="fas fa-user-graduate"></i></span>
+            <h3 class="service-title">1-on-1 Engineering Mentorship</h3>
+          </div>
+          <div class="service-body">
+            <ul class="service-bullets">
+              <li>Structured mentorship tailored for students and professional transitions.</li>
+              <li>Hands-on architectural code reviews &amp; system design deep-dives.</li>
+              <li>Guided roadmaps in Applied AI engineering, FastAPI, &amp; Azure.</li>
+              <li>Preparation strategies for technical interviews &amp; enterprise engineering.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">Academic Background</p>
+        <h2 class="section-title reveal-text">Education & <span class="gradient-text">Qualifications</span></h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card reveal tilt-card">
+          <div class="edu-degree">M.Tech – Signal & Image Processing (AI)</div>
+          <div class="edu-school">NIT Rourkela</div>
+          <div class="edu-year">2022 – 2024</div>
+          <div class="edu-gpa">CGPA: 7.34 — First Class Degree</div>
+        </div>
+        <div class="edu-card reveal tilt-card">
+          <div class="edu-degree">B.Tech – Electronics & Communication</div>
+          <div class="edu-school">Haldia Institute of Technology</div>
+          <div class="edu-year">2018 – 2022</div>
+          <div class="edu-gpa">CGPA: 8.75 | Qualified GATE (Pre-final Year)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="section-container">
+      <div class="section-header reveal">
+        <p class="section-label">Let's Connect</p>
+        <h2 class="section-title reveal-text">Get in <span class="gradient-text">Touch</span></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h3>Let's build something amazing together.</h3>
+          <p>Whether you have a project idea, a collaboration proposal, or just want to say hello — I'd love to hear
+            from you.</p>
+          <div class="contact-links">
+            <a href="mailto:ayonbiswas567@gmail.com" class="contact-link magnetic">
+              <span class="contact-link-icon"><i class="fas fa-envelope"></i></span>
+              ayonbiswas567@gmail.com
+            </a>
+            <a href="tel:+918617607547" class="contact-link magnetic">
+              <span class="contact-link-icon"><i class="fas fa-phone"></i></span>
+              +91-8617607547
+            </a>
+            <a href="https://www.linkedin.com/in/ayon-biswas-547ab9172/" target="_blank" class="contact-link magnetic">
+              <span class="contact-link-icon"><i class="fab fa-linkedin-in"></i></span>
+              linkedin.com/in/ayon-biswas-547ab9172
+            </a>
+            <a href="https://github.com/ayonbiswas567" target="_blank" class="contact-link magnetic">
+              <span class="contact-link-icon"><i class="fab fa-github"></i></span>
+              github.com/ayonbiswas567
+            </a>
+            <a href="#" class="contact-link magnetic">
+              <span class="contact-link-icon"><i class="fas fa-map-marker-alt"></i></span>
+              Gurugram, India
+            </a>
+          </div>
+        </div>
+        <form class="contact-form reveal" id="contact-form"
+          onsubmit="event.preventDefault(); alert('Message sent! (Demo)');">
+          <div class="form-group"><input type="text" placeholder="Your Name" required /></div>
+          <div class="form-group"><input type="email" placeholder="Your Email" required /></div>
+          <div class="form-group"><input type="text" placeholder="Subject" /></div>
+          <div class="form-group"><textarea placeholder="Your Message" required></textarea></div>
+          <button type="submit" class="btn btn-primary magnetic" style="width:100%;">Send Message <i
+              class="fas fa-paper-plane" style="margin-left:8px;"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 Ayon Biswas. Crafted with precision & passion.</p>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <button id="back-to-top" class="magnetic" aria-label="Back to top">
+    <svg class="progress-ring" width="48" height="48">
+      <circle class="progress-ring-circle-bg" cx="24" cy="24" r="20" stroke="rgba(255,255,255,0.1)" stroke-width="3"
+        fill="transparent" />
+      <circle class="progress-ring-circle" cx="24" cy="24" r="20" stroke="url(#gradient-accent)" stroke-width="3"
+        fill="transparent" />
+      <defs>
+        <linearGradient id="gradient-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#6c5ce7" />
+          <stop offset="100%" stop-color="#00cec9" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- AI CHATBOT TWIN -->
+  <div id="ai-chat-widget">
+    <!-- Chatbot CTA Bubble -->
+    <div id="chat-cta-bubble" class="chat-cta-tooltip">
+      <span class="chat-cta-dot"></span>
+      <span class="chat-cta-text">Wanna know about Ayon? Ask my AI Twin! 🤖</span>
+      <div class="chat-cta-arrow"></div>
+    </div>
+
+    <!-- Chat Button Bubble -->
+    <button id="ai-chat-bubble" class="magnetic" aria-label="Chat with Ayon's AI Twin">
+      <div class="bubble-glow"></div>
+      <i class="fas fa-robot"></i>
+      <span class="chat-status-pulse"></span>
+    </button>
+
+    <!-- Chat Window Container -->
+    <div id="ai-chat-window" class="glass-panel">
+      <!-- Window Header -->
+      <div class="chat-header">
+        <div class="chat-header-profile">
+          <div class="chat-avatar-container">
+            <img src="ayon-photo.jpg" alt="Ayon Biswas AI Twin" class="chat-avatar" />
+            <span class="online-indicator"></span>
+          </div>
+          <div class="chat-header-text">
+            <h4>Ayon's AI Twin</h4>
+            <span>Powered by Llama-3.1</span>
+          </div>
+        </div>
+        <button id="close-chat-btn" aria-label="Close Chat"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Messages Body -->
+      <div class="chat-messages-container" id="chat-messages" data-lenis-prevent>
+        <div class="message ai-message">
+          <div class="message-bubble">
+            Hi! I'm Ayon's digital twin. Ask me anything about his cloud-native systems architecture, R&D work at Keysight, AI Agent development, or his background! 🤖
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Suggest Chips -->
+      <div class="chat-suggest-container" id="chat-suggests">
+        <button class="suggest-chip">Core Tech Stack</button>
+        <button class="suggest-chip">Keysight R&D Finder</button>
+        <button class="suggest-chip">Open to Opportunities?</button>
+        <button class="suggest-chip">NIT Rourkela Thesis</button>
+      </div>
+
+      <!-- Input Footer -->
+      <div class="chat-input-container">
+        <form id="chat-form-el" onsubmit="event.preventDefault();">
+          <input type="text" id="chat-input-field" placeholder="Ask Ayon's AI..." autocomplete="off" required />
+          <button type="submit" id="chat-submit-btn" aria-label="Send Message">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO LIGHTBOX MODAL -->
+  <div id="video-modal" class="video-modal-overlay">
+    <div class="video-modal-content">
+      <button id="video-modal-close" class="video-modal-close-btn" aria-label="Close video player">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="video-player-wrapper">
+        <video id="modal-video-player" controls playsinline>
+          <source src="intro video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor-dot"></div>
+  <div class="custom-cursor-outline"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
