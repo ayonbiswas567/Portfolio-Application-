@@ -289,6 +289,13 @@ function initCustomCursor() {
 
   if (!cursorDot || !cursorOutline) return;
 
+  // Disable custom cursor on mobile/touch screens to save resources
+  if (window.innerWidth < 992 || window.matchMedia('(pointer: coarse)').matches) {
+    cursorDot.style.display = 'none';
+    cursorOutline.style.display = 'none';
+    return;
+  }
+
   let mouseX = 0, mouseY = 0;
   let dotX = 0, dotY = 0;
   let outlineX = 0, outlineY = 0;
@@ -527,10 +534,10 @@ function initParallax() {
     if (!ticking) {
       requestAnimationFrame(() => {
         const scrollY = window.scrollY;
-        if (orb1) orb1.style.transform = `translate(${Math.sin(scrollY * 0.002) * 30}px, ${scrollY * 0.25}px)`;
-        if (orb2) orb2.style.transform = `translate(${Math.cos(scrollY * 0.002) * 20}px, ${scrollY * -0.15}px)`;
+        if (orb1) orb1.style.transform = `translate3d(${Math.sin(scrollY * 0.002) * 30}px, ${scrollY * 0.25}px, 0)`;
+        if (orb2) orb2.style.transform = `translate3d(${Math.cos(scrollY * 0.002) * 20}px, ${scrollY * -0.15}px, 0)`;
         if (heroContent && scrollY < window.innerHeight) {
-          heroContent.style.transform = `translateY(${scrollY * 0.08}px)`;
+          heroContent.style.transform = `translate3d(0, ${scrollY * 0.08}px, 0)`;
           heroContent.style.opacity = `${1 - scrollY / (window.innerHeight * 0.8)}`;
         }
         ticking = false;

@@ -1271,7 +1271,6 @@ body.loading {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  backdrop-filter: blur(10px);
 }
 .marquee-item i {
   font-size: 1.3rem;
@@ -1304,8 +1303,8 @@ body.loading {
   background: linear-gradient(to left, #0a0a0f 0%, transparent 100%);
 }
 @keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 /* ===== RESUME NAV BUTTON ===== */
