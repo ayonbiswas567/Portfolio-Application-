@@ -152,48 +152,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 revealElements.forEach(el => revealObserver.observe(el));
 
 // ===== 3D TILT CARDS =====
-document.querySelectorAll('.tilt-card').forEach(card => {
-  let entryTimeout = null;
-  let rect = null;
-
-  card.addEventListener('mouseenter', () => {
-    rect = card.getBoundingClientRect();
-    // Smooth transition filter for initial hover entry (lift & scale)
-    card.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease';
-    
-    // Switch to a fast, responsive transition for active mousemove tracking after entry completes
-    clearTimeout(entryTimeout);
-    entryTimeout = setTimeout(() => {
-      card.style.transition = 'transform 0.08s ease-out, box-shadow 0.3s ease, border-color 0.3s ease';
-    }, 300);
-  });
-
-  card.addEventListener('mousemove', (e) => {
-    if (!rect) return;
-    const x = e.clientX - rect.left, y = e.clientY - rect.top;
-    const centerX = rect.width / 2, centerY = rect.height / 2;
-    
-    // Calculate rotation angles
-    const rotateX = (y - centerY) / 15;
-    const rotateY = (centerX - x) / 15;
-    
-    // Detect vertical hover lift amount based on card type to prevent design clipping/jumping
-    let lift = -4;
-    if (card.classList.contains('project-card') || card.classList.contains('service-card')) {
-      lift = -8;
-    }
-    
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(${lift}px) scale3d(1.02, 1.02, 1.02)`;
-  });
-
-  card.addEventListener('mouseleave', () => {
-    clearTimeout(entryTimeout);
-    rect = null;
-    // Graceful spring transition back to original center baseline
-    card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s ease, border-color 0.5s ease';
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale3d(1, 1, 1)';
-  });
-});
+// Disabled JS 3D tilt effect for performance. Hover animations are handled purely by CSS.
 
 // ===== COUNTER ANIMATION =====
 function animateCounters() {
@@ -1089,8 +1048,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Start the loading screen
   initLoadingScreen();
 
-  const canvas = document.getElementById('particles-canvas');
-  if (canvas) new ParticleSystem(canvas);
+  // const canvas = document.getElementById('particles-canvas');
+  // if (canvas) new ParticleSystem(canvas); // Disabled for performance
 
   const typeEl = document.getElementById('typewriter');
   if (typeEl) {
@@ -1129,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize existing premium features
   initMagneticButtons();
-  initCustomCursor();
+  // initCustomCursor(); // Disabled custom cursor to restore lag-free native OS cursor
   initBackToTop();
 
   // ===== Initialize NEW premium features =====

@@ -2016,3 +2016,17 @@ html.lenis, html.lenis body {
     transform: rotate(135deg);
   }
 }
+
+/* ===== AGGRESSIVE PERFORMANCE overrides ===== */
+#noise-canvas {
+  display: none !important;
+}
+.custom-cursor-dot, .custom-cursor-outline {
+  display: none !important;
+}
+body {
+  cursor: auto !important;
+}
+a, button, .magnetic, .tilt-card, input, textarea, select {
+  cursor: pointer !important;
+}
