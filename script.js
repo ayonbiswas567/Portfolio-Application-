@@ -154,8 +154,10 @@ revealElements.forEach(el => revealObserver.observe(el));
 // ===== 3D TILT CARDS =====
 document.querySelectorAll('.tilt-card').forEach(card => {
   let entryTimeout = null;
+  let rect = null;
 
   card.addEventListener('mouseenter', () => {
+    rect = card.getBoundingClientRect();
     // Smooth transition filter for initial hover entry (lift & scale)
     card.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease';
     
@@ -167,7 +169,7 @@ document.querySelectorAll('.tilt-card').forEach(card => {
   });
 
   card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
+    if (!rect) return;
     const x = e.clientX - rect.left, y = e.clientY - rect.top;
     const centerX = rect.width / 2, centerY = rect.height / 2;
     
@@ -186,6 +188,7 @@ document.querySelectorAll('.tilt-card').forEach(card => {
 
   card.addEventListener('mouseleave', () => {
     clearTimeout(entryTimeout);
+    rect = null;
     // Graceful spring transition back to original center baseline
     card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s ease, border-color 0.5s ease';
     card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale3d(1, 1, 1)';
@@ -464,8 +467,14 @@ function initCursorSpotlight() {
     spotlight.className = 'card-spotlight';
     card.appendChild(spotlight);
 
+    let rect = null;
+
+    card.addEventListener('mouseenter', () => {
+      rect = card.getBoundingClientRect();
+    });
+
     card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
+      if (!rect) return;
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       spotlight.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(108,92,231,0.15), rgba(0,206,201,0.05) 40%, transparent 70%)`;
@@ -474,6 +483,7 @@ function initCursorSpotlight() {
 
     card.addEventListener('mouseleave', () => {
       spotlight.style.opacity = '0';
+      rect = null;
     });
   });
 }
@@ -1123,7 +1133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
 
   // ===== Initialize NEW premium features =====
-  initLenisSmoothScroll();
+  // initLenisSmoothScroll(); // Disabled to prevent scrolling stutters and let the GPU handle native scrolling
   // initNoiseGrain(); // Disabled for CPU performance - now handled by GPU-accelerated CSS noise
   initCursorSpotlight();
   initAnimatedBorders();
