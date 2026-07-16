@@ -797,64 +797,89 @@ class AIChatbot {
     let aiResponseText = "";
 
     try {
-      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${this.groqApiKey}`,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "llama-3.1-8b-instant",
-          messages: [
-            { role: "system", content: CHATBOT_PERSONA_PROMPT },
-            ...this.chatHistory
-          ],
-          temperature: 0.7,
-          max_tokens: 1024,
-          stream: true
-        })
-      });
+      const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1" || location.hostname === "";
+      
+      let response;
+      if (isLocal) {
+        response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${this.groqApiKey}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            model: "llama-3.1-8b-instant",
+            messages: [
+              { role: "system", content: CHATBOT_PERSONA_PROMPT },
+              ...this.chatHistory
+            ],
+            temperature: 0.7,
+            max_tokens: 1024,
+            stream: true
+          })
+        });
+      } else {
+        response = await fetch("/.netlify/functions/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            messages: [
+              { role: "system", content: CHATBOT_PERSONA_PROMPT },
+              ...this.chatHistory
+            ]
+          })
+        });
+      }
 
-      // Remove typing indicator once stream starts
+      // Remove typing indicator
       indicator.remove();
 
       if (!response.ok) {
         throw new Error(`HTTP Error: ${response.status}`);
       }
 
-      // Initialize empty AI bubble for streaming chunks
-      aiBubble = this.appendMessage("", false);
+      if (isLocal) {
+        // Initialize empty AI bubble for streaming chunks
+        aiBubble = this.appendMessage("", false);
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let buffer = "";
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let buffer = "";
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
 
-        const lines = buffer.split("\n");
-        buffer = lines.pop(); // Keep partial line in buffer
+          const lines = buffer.split("\n");
+          buffer = lines.pop(); // Keep partial line in buffer
 
-        for (const line of lines) {
-          const cleaned = line.trim();
-          if (!cleaned || cleaned === "data: [DONE]") continue;
-          if (cleaned.startsWith("data: ")) {
-            try {
-              const json = JSON.parse(cleaned.substring(6));
-              const content = json.choices[0]?.delta?.content || "";
-              if (content) {
-                aiResponseText += content;
-                // Render nicely (handle linebreaks simple conversion)
-                aiBubble.innerHTML = aiResponseText.replace(/\n/g, "<br>");
-                this.scrollToBottom();
+          for (const line of lines) {
+            const cleaned = line.trim();
+            if (!cleaned || cleaned === "data: [DONE]") continue;
+            if (cleaned.startsWith("data: ")) {
+              try {
+                const json = JSON.parse(cleaned.substring(6));
+                const content = json.choices[0]?.delta?.content || "";
+                if (content) {
+                  aiResponseText += content;
+                  // Render nicely (handle linebreaks simple conversion)
+                  aiBubble.innerHTML = aiResponseText.replace(/\n/g, "<br>");
+                  this.scrollToBottom();
+                }
+              } catch (err) {
+                // Ignore partial chunk syntax errors
               }
-            } catch (err) {
-              // Ignore partial chunk syntax errors
             }
           }
         }
+      } else {
+        // Handle non-streaming JSON response from serverless function
+        const data = await response.json();
+        aiResponseText = data.choices[0]?.message?.content || "";
+        this.appendMessage(aiResponseText.replace(/\n/g, "<br>"), false);
       }
 
       this.chatHistory.push({ role: "assistant", content: aiResponseText });
