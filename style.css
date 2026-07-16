@@ -2030,3 +2030,17 @@ body {
 a, button, .magnetic, .tilt-card, input, textarea, select {
   cursor: pointer !important;
 }
+
+/* ===== GPU-ACCELERATED HOVER EFFECTS ===== */
+.bento-card, .project-card, .edu-card, .stat-card, .timeline-card, .service-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.bento-card:hover, .project-card:hover, .edu-card:hover, .stat-card:hover, .timeline-card:hover, .service-card:hover {
+  transform: perspective(1000px) rotateX(4deg) rotateY(-2deg) translateY(-8px) scale3d(1.02, 1.02, 1.02) !important;
+  box-shadow: 0 20px 40px rgba(108, 92, 231, 0.18), 0 15px 25px rgba(0, 0, 0, 0.3) !important;
+  border-color: rgba(108, 92, 231, 0.4) !important;
+}
