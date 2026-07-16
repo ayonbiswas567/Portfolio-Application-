@@ -583,18 +583,47 @@ function initActiveNav() {
 
   if (!sections.length || !navAnchors.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navAnchors.forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
-        });
+  const handleActiveNav = () => {
+    let currentSectionId = "";
+    
+    // Check if we are at the absolute bottom of the page
+    const isAtBottom = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 80;
+    
+    if (isAtBottom) {
+      const lastSection = sections[sections.length - 1];
+      if (lastSection) {
+        currentSectionId = lastSection.getAttribute('id');
       }
-    });
-  }, { threshold: 0.3, rootMargin: '-10% 0px -60% 0px' });
+    } else {
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        // If the top of the section is in the upper 40% of the screen
+        if (rect.top <= window.innerHeight * 0.4) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+    }
 
-  sections.forEach(section => observer.observe(section));
+    if (currentSectionId) {
+      navAnchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${currentSectionId}`);
+      });
+    }
+  };
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        handleActiveNav();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Run once initially
+  handleActiveNav();
 }
 
 // ===== 10. SECTION GLOW DIVIDERS =====
